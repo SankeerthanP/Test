@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>JS Utilities — Interactive</title>
+
+    <style>
+      /* ---------- GLOBAL PAGE STYLE ---------- */
+      html,
+      body {
+        overflow-x: hidden; /* 🔥 Fix horizontal movement */
+      }
+
+      * {
+        max-width: 100%; /* 🔥 Prevent elements from exceeding screen */
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 16px;
+        background: linear-gradient(135deg, #dff1ff, #f3e8ff);
+        color: #0a1a2b;
+      }
+
+      h1 {
+        text-align: center;
+        padding: 18px;
+        color: #ffffff;
+        background: linear-gradient(135deg, #0062ff, #9c27ff);
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        letter-spacing: 0.5px;
+        overflow: hidden;
+      }
+
+      /* ---------- CARD ---------- */
+      .card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 18px;
+        margin: 16px 0;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        transition: 0.2s ease;
+        transform: translateZ(0);
+      }
+
+      .card:hover {
+        transform: scale(1.02);
+        transform-origin: center;
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+      }
+
+      label {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      /* ---------- INPUTS ---------- */
+      input[type="text"],
+      input[type="number"],
+      textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #c8d9f0;
+        font-size: 15px;
+        transition: 0.25s ease;
+        outline: none;
+        background: #ffffff;
+      }
+
+      input:focus {
+        border-color: #6a00ff;
+        box-shadow: 0 0 8px rgba(106, 0, 255, 0.25);
+      }
+
+      .hint {
+        color: #607088;
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      /* ---------- BUTTON ---------- */
+      button {
+        margin-top: 10px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #0062ff, #8b00ff);
+        color: white;
+        letter-spacing: 0.3px;
+        transition: 0.25s ease;
+        box-shadow: 0 3px 10px rgba(106, 0, 255, 0.3);
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 16px rgba(106, 0, 255, 0.4);
+      }
+
+      /* ---------- RESULT BOX ---------- */
+      .result {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background: #f7faff;
+        border: 1px solid #d9e8ff;
+        min-height: 24px;
+        font-weight: 600;
+        color: #0a1a2b;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>JS Utilities — Interactive (10 Programs)</h1>
+
+    <!-- 1 Reverse -->
+    <div class="card">
+      <label>1. Reverse a String</label>
+      <input id="reverseInput" type="text" placeholder="hello" />
+      <button onclick="handleReverse()">Get Answer</button>
+      <div id="reverseResult" class="result"></div>
+    </div>
+
+    <!-- 2 Count vowels -->
+    <div class="card">
+      <label>2. Count Vowels</label>
+      <input id="vowelInput" type="text" placeholder="Education" />
+      <button onclick="handleCountVowels()">Get Answer</button>
+      <div id="vowelResult" class="result"></div>
+    </div>
+
+    <!-- 3 Longest word -->
+    <div class="card">
+      <label>3. Longest Word</label>
+      <input
+        id="longestInput"
+        type="text"
+        placeholder="Learning JavaScript is fun"
+      />
+      <button onclick="handleLongest()">Get Answer</button>
+      <div id="longestResult" class="result"></div>
+    </div>
+
+    <!-- 4 Palindrome -->
+    <div class="card">
+      <label>4. Palindrome Check</label>
+      <input id="palindromeInput" type="text" placeholder="madam" />
+      <button onclick="handlePalindrome()">Get Answer</button>
+      <div id="palindromeResult" class="result"></div>
+    </div>
+
+    <!-- 5 Remove duplicates -->
+    <div class="card">
+      <label>5. Remove Duplicates</label>
+      <input id="duplicatesInput" type="text" placeholder="1,2,3,2,4,1" />
+      <button onclick="handleRemoveDuplicates()">Get Answer</button>
+      <div id="duplicatesResult" class="result"></div>
+    </div>
+
+    <!-- 6 Second largest -->
+    <div class="card">
+      <label>6. Second Largest Number</label>
+      <input id="secondLargestInput" type="text" placeholder="10,5,8,20,15" />
+      <button onclick="handleSecondLargest()">Get Answer</button>
+      <div id="secondLargestResult" class="result"></div>
+    </div>
+
+    <!-- 7 Char frequency -->
+    <div class="card">
+      <label>7. Character Frequency</label>
+      <input id="charFreqInput" type="text" placeholder="apple" />
+      <button onclick="handleCharFreq()">Get Answer</button>
+      <div id="charFreqResult" class="result"></div>
+    </div>
+
+    <!-- 8 Sum of digits -->
+    <div class="card">
+      <label>8. Sum of Digits</label>
+      <input id="sumDigitsInput" type="number" placeholder="1234" />
+      <button onclick="handleSumDigits()">Get Answer</button>
+      <div id="sumDigitsResult" class="result"></div>
+    </div>
+
+    <!-- 9 Sort words -->
+    <div class="card">
+      <label>9. Sort Words Alphabetically</label>
+      <input id="sortWordsInput" type="text" placeholder="banana apple mango" />
+      <button onclick="handleSortWords()">Get Answer</button>
+      <div id="sortWordsResult" class="result"></div>
+    </div>
+
+    <!-- 10 Missing number -->
+    <div class="card">
+      <label>10. Find Missing Number</label>
+      <input id="missingInput" type="text" placeholder="1,2,4,5,6" />
+      <button onclick="handleFindMissing()">Get Answer</button>
+      <div id="missingResult" class="result"></div>
+    </div>
+
+    <script>
+      /* ------- PROGRAM LOGIC FUNCTIONS ------- */
+
+      function reverseString(str) {
+        return str.split("").reverse().join("");
+      }
+
+      function countVowels(str) {
+        let vowels = "aeiou";
+        let count = 0;
+        for (let c of str.toLowerCase()) if (vowels.includes(c)) count++;
+        return count;
+      }
+
+      function findLongestWord(sentence) {
+        let words = sentence.split(" ");
+        let longest = "";
+        for (let w of words) if (w.length > longest.length) longest = w;
+        return longest;
+      }
+
+      function isPalindrome(str) {
+        return str === str.split("").reverse().join("");
+      }
+
+      function removeDuplicates(arr) {
+        return [...new Set(arr)];
+      }
+
+      function secondLargest(arr) {
+        let u = [...new Set(arr)];
+        u.sort((a, b) => b - a);
+        return u[1];
+      }
+
+      function charFrequency(str) {
+        let obj = {};
+        for (let c of str) obj[c] = (obj[c] || 0) + 1;
+        return obj;
+      }
+
+      function sumOfDigits(num) {
+        return num
+          .toString()
+          .split("")
+          .reduce((s, d) => s + Number(d), 0);
+      }
+
+      function sortWords(sentence) {
+        return sentence.split(" ").sort().join(" ");
+      }
+
+      function findMissingNumber(arr) {
+        let n = arr.length + 1;
+        let total = (n * (n + 1)) / 2;
+        let sum = arr.reduce((a, b) => a + b, 0);
+        return total - sum;
+      }
+
+      /* ------- INPUT PARSER ------- */
+      function parseNumberArray(input) {
+        return input.split(",").map((s) => Number(s.trim()));
+      }
+
+      /* ------- BUTTON HANDLERS ------- */
+      function handleReverse() {
+        document.getElementById("reverseResult").textContent = reverseString(
+          document.getElementById("reverseInput").value
+        );
+      }
+
+      function handleCountVowels() {
+        document.getElementById("vowelResult").textContent = countVowels(
+          document.getElementById("vowelInput").value
+        );
+      }
+
+      function handleLongest() {
+        document.getElementById("longestResult").textContent = findLongestWord(
+          document.getElementById("longestInput").value
+        );
+      }
+
+      function handlePalindrome() {
+        const v = document.getElementById("palindromeInput").value;
+        document.getElementById("palindromeResult").textContent = isPalindrome(
+          v
+        )
+          ? "true (Palindrome)"
+          : "false (Not Palindrome)";
+      }
+
+      function handleRemoveDuplicates() {
+        let arr = document.getElementById("duplicatesInput").value.split(",");
+        document.getElementById("duplicatesResult").textContent =
+          JSON.stringify(removeDuplicates(arr));
+      }
+
+      function handleSecondLargest() {
+        let arr = parseNumberArray(
+          document.getElementById("secondLargestInput").value
+        );
+        document.getElementById("secondLargestResult").textContent =
+          secondLargest(arr);
+      }
+
+      function handleCharFreq() {
+        document.getElementById("charFreqResult").textContent = JSON.stringify(
+          charFrequency(document.getElementById("charFreqInput").value)
+        );
+      }
+
+      function handleSumDigits() {
+        let n = Number(document.getElementById("sumDigitsInput").value);
+        document.getElementById("sumDigitsResult").textContent = sumOfDigits(n);
+      }
+
+      function handleSortWords() {
+        document.getElementById("sortWordsResult").textContent = sortWords(
+          document.getElementById("sortWordsInput").value
+        );
+      }
+
+      function handleFindMissing() {
+        let arr = parseNumberArray(
+          document.getElementById("missingInput").value
+        );
+        document.getElementById("missingResult").textContent =
+          findMissingNumber(arr);
+      }
+    </script>
+  </body>
+</html>
